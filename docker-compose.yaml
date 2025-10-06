@@ -1,0 +1,21 @@
+services:
+  etl-service:
+    build:
+      context: ./ELT
+      dockerfile: Dockerfile
+    container_name: dockerised-etl
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+    networks:
+      - etl-network
+    # restart: unless-stopped
+    volumes:
+      - ./extracted.csv:/usr/src/app/extracted.csv
+
+networks:
+  etl-network:
+    external: true
