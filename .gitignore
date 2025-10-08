@@ -2,3 +2,6 @@ etl_venv
 .env
 output.html
 *csv
+target/
+dbt_packages/
+logs/

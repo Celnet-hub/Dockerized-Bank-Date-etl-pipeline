@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: public
+    description: "Raw data extracted from web scraping"
+    tables:
+      - name: largest_banks_2025
+        description: "Raw largest banks data scraped from Wikipedia"
+        columns:
+          - name: Banks
+            description: "Name of the bank"
+            tests:
+              - not_null
+          - name: Assets_Billions_USD_2025
+            description: "Total assets in billions USD for 2025"
+            tests:
+              - not_null
