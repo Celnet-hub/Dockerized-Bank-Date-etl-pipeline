@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: stg_largest_banks
+    description: "Staging model for largest banks data with cleaned asset values"
+    columns:
+      - name: bank_name
+        description: "Name of the bank"
+        tests:
+          - not_null
+          - unique
+      - name: assets_usd_billions
+        description: "Total assets in billions USD (cleaned numeric value)"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+  - name: fact_banks_multi_currency
+    description: "Final fact table with banks data converted to multiple currencies"
+    columns:
+      - name: rank
+        description: "Ranking by total assets (USD)"
+        tests:
+          - not_null
+          - unique
+      - name: bank_name
+        description: "Name of the bank"
+        tests:
+          - not_null
+      - name: assets_usd_billions
+        description: "Total assets in billions USD"
+        tests:
+          - not_null
+      - name: assets_gbp_billions
+        description: "Total assets in billions GBP"
+        tests:
+          - not_null
+      - name: assets_eur_billions
+        description: "Total assets in billions EUR"
+        tests:
+          - not_null
+      - name: assets_inr_billions
+        description: "Total assets in billions INR"
+        tests:
+          - not_null
